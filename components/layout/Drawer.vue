@@ -2,11 +2,11 @@
   <q-drawer
     v-model="isDrawerOpened"
     show-if-above
-    :width="200"
+    :width="300"
     :breakpoint="500"
     bordered
   >
-    <q-scroll-area class="fit">
+    <q-scroll-area class="fit" style="padding:16px;">
       <q-list>
         <template v-for="(menuItem, index) in menuList" :key="index">
           <q-item
@@ -16,7 +16,7 @@
             @click="selected=menuItem.label"
             :to="menuItem.path"
             class="text-primary"
-            active-class="bg-primary text-white"
+            active-class="bg-primary text-white rounded-borders	"
           >
             <q-item-section avatar>
               <q-icon :name="menuItem.icon" />
@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-const selected = ref('Inbox');
+const selected = ref('Employees list');
 const props = defineProps({
   isDrawerOpened: {
     type: Boolean,

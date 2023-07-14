@@ -3,7 +3,7 @@
     <q-table
       flat
       bordered
-      title="Treats"
+      title="Employees"
       :rows="rows"
       :columns="columns"
       row-key="name"
@@ -33,7 +33,7 @@
       </template>
     </q-table>
 
-    <div class="q-mt-md">Selected: {{ JSON.stringify(selected) }}</div>
+    <div class="q-mt-md" hidden>Selected: {{ JSON.stringify(selected) }}</div>
   </div>
 </template>
 
@@ -44,7 +44,7 @@ const columns = ref([
   {
     name: "desc",
     required: true,
-    label: "Dessert (100g serving)",
+    label: "Name",
     align: "left",
     field: (row) => row.name,
     format: (val) => `${val}`,
@@ -52,141 +52,56 @@ const columns = ref([
   },
   {
     name: "calories",
-    align: "center",
-    label: "Calories",
+    align: "left",
+    label: "Email",
     field: "calories",
     sortable: true,
   },
-  { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
-  { name: "carbs", label: "Carbs (g)", field: "carbs" },
-  { name: "protein", label: "Protein (g)", field: "protein" },
-  { name: "sodium", label: "Sodium (mg)", field: "sodium" },
   {
-    name: "calcium",
-    label: "Calcium (%)",
-    field: "calcium",
+    name: "fat",
+    label: "Password",
+    field: "fat",
     sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-  },
-  {
-    name: "iron",
-    label: "Iron (%)",
-    field: "iron",
-    sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+    align: "left",
+    format: (val) => `${new Array(val.length).fill("*").join("")}`,
   },
   { name: "actions", label: "Actions", field: "", align: "center" },
 ]);
 
 const rows = ref([
   {
-    name: "Frozen Yogurt",
-    calories: 159,
-    fat: 6.0,
-    carbs: 24,
-    protein: 4.0,
-    sodium: 87,
-    calcium: "14%",
-    iron: "1%",
+    calories: "JohnDoe@Email.com",
+    name: "John",
+    fat: "JohnDoe@Email.com",
   },
   {
-    name: "Ice cream sandwich",
-    calories: 237,
-    fat: 9.0,
-    carbs: 37,
-    protein: 4.3,
-    sodium: 129,
-    calcium: "8%",
-    iron: "1%",
+    calories: "JohnDoe2@Email.com",
+    name: "Doe",
+    fat: "JohnDoe2@Email.com",
   },
   {
-    name: "Eclair",
-    calories: 262,
-    fat: 16.0,
-    carbs: 23,
-    protein: 6.0,
-    sodium: 337,
-    calcium: "6%",
-    iron: "7%",
+    calories: "JohnDoe3@Email.com",
+    name: "User",
+    fat: "JohnDoe3@Email.com",
   },
   {
-    name: "Cupcake",
-    calories: 305,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-    sodium: 413,
-    calcium: "3%",
-    iron: "8%",
+    calories: "Mark@Email.com",
+    name: "Mark",
+    fat: "Mark@Email.com",
   },
   {
-    name: "Gingerbread",
-    calories: 356,
-    fat: 16.0,
-    carbs: 49,
-    protein: 3.9,
-    sodium: 327,
-    calcium: "7%",
-    iron: "16%",
-  },
-  {
-    name: "Jelly bean",
-    calories: 375,
-    fat: 0.0,
-    carbs: 94,
-    protein: 0.0,
-    sodium: 50,
-    calcium: "0%",
-    iron: "0%",
-  },
-  {
-    name: "Lollipop",
-    calories: 392,
-    fat: 0.2,
-    carbs: 98,
-    protein: 0,
-    sodium: 38,
-    calcium: "0%",
-    iron: "2%",
-  },
-  {
-    name: "Honeycomb",
-    calories: 408,
-    fat: 3.2,
-    carbs: 87,
-    protein: 6.5,
-    sodium: 562,
-    calcium: "0%",
-    iron: "45%",
-  },
-  {
-    name: "Donut",
-    calories: 452,
-    fat: 25.0,
-    carbs: 51,
-    protein: 4.9,
-    sodium: 326,
-    calcium: "2%",
-    iron: "22%",
-  },
-  {
-    name: "KitKat",
-    calories: 518,
-    fat: 26.0,
-    carbs: 65,
-    protein: 7,
-    sodium: 54,
-    calcium: "12%",
-    iron: "6%",
+    calories: "sara@email.com",
+    name: "Sara",
+    fat: "sara@email.com",
   },
 ]);
 
 const editRow = (props) => {
-  console.log(321)
+  console.log(321);
 };
 
 const deleteRow = (props) => {
-    console.log(123)
+  console.log(123);
 };
 const selected = ref([]);
 const getSelectedString = () => {
