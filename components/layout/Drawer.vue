@@ -13,10 +13,13 @@
             clickable
             :active="menuItem.label === selected"
             v-ripple
+            @click="selected=menuItem.label"
             :to="menuItem.path"
+            class="text-primary"
+            active-class="bg-primary text-white"
           >
             <q-item-section avatar>
-              <q-icon color="primary" :name="menuItem.icon" />
+              <q-icon :name="menuItem.icon" />
             </q-item-section>
             <q-item-section>
               {{ menuItem.label }}
@@ -30,7 +33,7 @@
 </template>
 
 <script setup>
-const selected = ref('Index');
+const selected = ref('Inbox');
 const props = defineProps({
   isDrawerOpened: {
     type: Boolean,
@@ -42,6 +45,7 @@ const props = defineProps({
   },
 });
 const isDrawerOpened = ref(props.isDrawerOpened);
+
 watch(
   () => props.isDrawerOpened,
   () => {
