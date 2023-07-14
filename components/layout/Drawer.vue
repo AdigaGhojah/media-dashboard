@@ -2,21 +2,24 @@
   <q-drawer
     v-model="isDrawerOpened"
     show-if-above
-    :width="200"
+    :width="300"
     :breakpoint="500"
     bordered
   >
-    <q-scroll-area class="fit">
+    <q-scroll-area class="fit" style="padding:16px;">
       <q-list>
         <template v-for="(menuItem, index) in menuList" :key="index">
           <q-item
             clickable
             :active="menuItem.label === selected"
             v-ripple
+            @click="selected=menuItem.label"
             :to="menuItem.path"
+            class="text-primary"
+            active-class="bg-primary text-white rounded-borders	"
           >
             <q-item-section avatar>
-              <q-icon color="primary" :name="menuItem.icon" />
+              <q-icon :name="menuItem.icon" />
             </q-item-section>
             <q-item-section>
               {{ menuItem.label }}
@@ -30,7 +33,7 @@
 </template>
 
 <script setup>
-const selected = ref('Index');
+const selected = ref('Employees list');
 const props = defineProps({
   isDrawerOpened: {
     type: Boolean,
@@ -42,6 +45,7 @@ const props = defineProps({
   },
 });
 const isDrawerOpened = ref(props.isDrawerOpened);
+
 watch(
   () => props.isDrawerOpened,
   () => {
