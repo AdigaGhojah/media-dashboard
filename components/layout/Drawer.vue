@@ -1,6 +1,6 @@
 <template>
   <q-drawer
-    v-model="isDrawerOpened"
+    v-model="drawer.isDrawerOpened"
     show-if-above
     :width="300"
     :breakpoint="500"
@@ -11,9 +11,9 @@
         <template v-for="(menuItem, index) in menuList" :key="index">
           <q-item
             clickable
-            :active="menuItem.label === selected"
+            :active="menuItem.path === selected"
             v-ripple
-            @click="selected=menuItem.label"
+            @click="selected=menuItem.path"
             :to="menuItem.path"
             class="text-primary"
             active-class="bg-primary text-white rounded-borders	"
@@ -33,10 +33,11 @@
 </template>
 
 <script setup>
-const selected = ref('Admin Profile');
+const route = useRoute();
+const selected = ref(route.path.replace('/',''));
 const props = defineProps({
-  isDrawerOpened: {
-    type: Boolean,
+  drawer: {
+    type: Object,
     required: true,
   },
   menuList: {
@@ -44,13 +45,5 @@ const props = defineProps({
     required: true,
   },
 });
-const isDrawerOpened = ref(props.isDrawerOpened);
-
-watch(
-  () => props.isDrawerOpened,
-  () => {
-    isDrawerOpened.value = props.isDrawerOpened;
-  }
-);
 
 </script>

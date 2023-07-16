@@ -1,7 +1,7 @@
 <template>
   <q-header elevated>
     <q-toolbar>
-      <q-btn flat @click="menuClicked" round dense icon="menu" />
+      <q-btn flat @click="toggleDrawer" round dense icon="menu" />
       <q-toolbar-title>Admin Dashboard</q-toolbar-title>
     </q-toolbar>
   </q-header>
@@ -10,12 +10,12 @@
 <script setup>
 const emit = defineEmits(["menuClicked"]);
 const props = defineProps({
-  isDrawerOpened: {
-    type: Boolean,
+  drawer: {
+    type: Object,
     required: true,
   },
 });
-const menuClicked = () => {
-  emit("menuClicked", !props.isDrawerOpened);
+const toggleDrawer = () => {
+  props.drawer.isDrawerOpened = !props.drawer.isDrawerOpened;
 };
 </script>
