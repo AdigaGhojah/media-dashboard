@@ -1,8 +1,8 @@
 <template>
     <q-layout view="hHh LpR fff">
-    <layoutHeader @menuClicked="isDrawerOpened=!isDrawerOpened" :isDrawerOpened="isDrawerOpened"/>
+    <layoutHeader :drawer="drawer"/>
 
-    <layoutDrawer :isDrawerOpened="isDrawerOpened" :menuList="menuList" />
+    <layoutDrawer :menuList="menuList"  :drawer="drawer" />
 
     <q-page-container>
       <q-page padding>
@@ -17,7 +17,9 @@
 <script setup>
 
 
-const isDrawerOpened = ref(true);
+const drawer = ref({
+  isDrawerOpened:null
+})
 
 
 const menuList = [
@@ -32,7 +34,7 @@ const menuList = [
   },{
     icon: "business",
     label: "Groups(company) List",
-    path: "/groups-list",
+    path: "groups-list",
     separator: true,
   },{
     icon: "perm_media",
