@@ -7,13 +7,18 @@
 </template>
 
 <script setup>
-const layout = "dashboard";
+const route = useRoute();
+const layout = computed(() => {
+  if (route.path == "/" || route.path.includes("/user")) {
+    return "default";
+  } else {
+    return "dashboard";
+  }
+});
 </script>
 
-
 <style>
-:root{
-  --q-primary: #0A032D;
+:root {
+  --q-primary: #0a032d;
 }
-
 </style>
