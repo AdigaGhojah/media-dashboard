@@ -1,14 +1,23 @@
 <template>
   <q-layout>
     <q-page-container>
-      <q-page class="fit row wrap justify-center items-center">
+      <q-page>
         <div class="q-pa-md" style="max-width: 400px;width:100%">
-          <q-form @submit="onSubmit" class="q-gutter-md" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
+        <h4 class="text-h4 q-mt-none">Admin Profile</h4>
+          <q-form @submit="onSubmit" class="q-gutter-sm">
             <q-input
-              outlined 
+            outlined 
+              v-model="name"
+              label="Name *"
+              lazy-rules
+              :rules="[
+                (val) => (val && val.length > 0) || 'This field is required',
+              ]"
+            />
+            <q-input
+            outlined 
               v-model="email"
               label="Email *"
-              hint="admin@admin.com"
               lazy-rules
               :rules="[
                 (val) => (val && val.length > 0) || 'This field is required',
@@ -17,20 +26,20 @@
             />
 
             <q-input
-              outlined 
+            outlined 
               type="password"
               v-model="password"
               label="Password *"
-              hint="admin"
               lazy-rules
               :rules="[
                 (val) =>
                   (val !== null && val !== '') || 'This field is required',
+                  (val) => (val < 6) || 'The password length should be more than 6 character',
               ]"
             />
 
             <div>
-              <q-btn label="Submit" type="submit" color="primary" />
+              <q-btn label="Update" type="submit" color="primary" />
             </div>
           </q-form>
         </div>
@@ -42,21 +51,10 @@
 const emailRegex = ref(
   /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 );
+const name = ref(null);
 const email = ref(null);
 const password = ref(null);
 const onSubmit = async () => {
-  if (email.value == "admin@admin.com" && password.value == "admin") {
-      localStorage.setItem('role','admin');
-    await navigateTo("/admin-profile");
-  } else if (
-    email.value == "employe@employe.com" &&
-    password.value == "employe"
-  ) {
-    localStorage.setItem('role','employe');
-    await navigateTo("/employ-profile");
-  } else if (email.value == "user@user.com" && password.value == "user") {
-    localStorage.setItem('role','user');
-    await navigateTo("/user");
-  }
+    console.log(3212);
 };
 </script>

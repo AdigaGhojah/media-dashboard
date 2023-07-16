@@ -24,15 +24,20 @@ const menuList = [
   {
     icon: "manage_accounts",
     label: "Admin Profile",
-    path: "/",
+    path: "admin-profile",
   },{
     icon: "people",
     label: "Employees list",
-    path: "employees",
+    path: "employees-list",
   },{
     icon: "business",
     label: "Groups(company) List",
-    path: "/",
+    path: "/groups-list",
+    separator: true,
+  },{
+    icon: "perm_media",
+    label: "Media List",
+    path: "media-list",
   },
   // {
   //   icon: "send",

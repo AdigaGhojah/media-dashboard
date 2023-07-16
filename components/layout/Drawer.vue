@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-const selected = ref('Employees list');
+const selected = ref('Admin Profile');
 const props = defineProps({
   isDrawerOpened: {
     type: Boolean,
