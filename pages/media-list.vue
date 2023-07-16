@@ -57,7 +57,7 @@ const rows = ref([
     email: "JohnDoe2@Email.com",
     password: "JohnDoe2@Email.com",
     img: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&q=80",
-    status:'published'
+    status:'not published'
   },
   {
     name: "User",
@@ -77,7 +77,7 @@ const rows = ref([
     email: "Mark@Email.com",
     password: "Mark@Email.com",
     img: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=120&q=80",
-    status:'published'
+    status:'not published'
   },
   {
     name: "Sara",
