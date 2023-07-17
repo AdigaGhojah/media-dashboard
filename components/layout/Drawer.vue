@@ -34,7 +34,7 @@
 
 <script setup>
 const route = useRoute();
-const selected = ref(route.path.replace('/',''));
+const selected = ref(route.path);
 const props = defineProps({
   drawer: {
     type: Object,

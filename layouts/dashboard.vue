@@ -26,20 +26,20 @@ const menuList = [
   {
     icon: "manage_accounts",
     label: "Admin Profile",
-    path: "admin-profile",
+    path: "/admin-profile",
   },{
     icon: "people",
     label: "Employees list",
-    path: "employees-list",
+    path: "/employees-list",
   },{
     icon: "business",
     label: "Groups(company) List",
-    path: "groups-list",
+    path: "/groups-list",
     separator: true,
   },{
     icon: "perm_media",
     label: "Media List",
-    path: "media-list",
+    path: "/media-list",
   },
   // {
   //   icon: "send",
