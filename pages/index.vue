@@ -1,7 +1,4 @@
 <template>
-  <q-layout>
-    <q-page-container>
-      <q-page class="fit row wrap justify-center items-center">
         <div class="q-pa-md" style="max-width: 400px;width:100%">
           <q-form @submit="onSubmit" class="q-gutter-md" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false">
             <q-input
@@ -34,9 +31,6 @@
             </div>
           </q-form>
         </div>
-      </q-page>
-    </q-page-container>
-  </q-layout>
 </template>
 <script setup>
 const emailRegex = ref(
