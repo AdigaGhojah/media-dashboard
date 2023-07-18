@@ -57,7 +57,7 @@ const onShowUsers = (row) => {
 };
 const columns = ref([
   {
-    label: "Name",
+    label: "Company Name",
     align: "left",
     field: "name",
   },
