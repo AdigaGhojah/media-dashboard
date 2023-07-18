@@ -1,7 +1,7 @@
 <template>
   <q-header elevated>
     <q-toolbar>
-      <q-btn flat @click="toggleDrawer" round dense icon="menu" />
+      <q-btn v-if="drawer" flat @click="toggleDrawer" round dense icon="menu" />
       <q-toolbar-title>Admin Dashboard</q-toolbar-title>
     </q-toolbar>
   </q-header>
@@ -12,7 +12,7 @@ const emit = defineEmits(["menuClicked"]);
 const props = defineProps({
   drawer: {
     type: Object,
-    required: true,
+    required: false,
   },
 });
 const toggleDrawer = () => {

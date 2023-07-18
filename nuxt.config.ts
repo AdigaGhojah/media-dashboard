@@ -7,5 +7,6 @@ export default defineNuxtConfig({
   ],
   app: {
     baseURL: '/media-dashboard/' //https://github.com/AdigaGhojah/media-dashboard
-  }
+  },
+  css: ['/app.css'],
 })
