@@ -78,23 +78,6 @@ const columns = ref([
   },
   { name: "actions", label: "Actions", field: "", align: "center" },
 ]);
-// const tableActions = ref([
-//   {
-//     to: (props) => `groups-list/${props.name}`,
-//     icon: () => "edit",
-//     tooltip: () => "Edit",
-//   },
-//   {
-//     onClick: (props) => onDeleteRow(props),
-//     icon: () => "delete",
-//     tooltip: () => "Delete",
-//   },
-//   {
-//     onClick: (props) => onShowUsers(props),
-//     icon: () => "people",
-//     tooltip: () => "Show Users List",
-//   },
-// ]);
 const getTableActions = () => {
   return [
     {
