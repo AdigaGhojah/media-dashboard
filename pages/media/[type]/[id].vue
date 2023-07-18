@@ -1,0 +1,3 @@
+<template>
+    Media Page
+</template>

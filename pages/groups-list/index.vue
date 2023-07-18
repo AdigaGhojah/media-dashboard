@@ -13,58 +13,47 @@
     :rows="rows"
     :tableActions="getTableActions()"
   />
-  <Dialog :dialogObj="dialogData" />
+  <Dialog
+    v-for="dialogData in dialogsData"
+    :key="dialogData.name"
+    :dialogObj="dialogData"
+  />
 </template>
 
 <script setup>
-const dialogData = ref({
-  isOpened: false,
-  title: "",
-  onConfirm: () => {},
-  selectedRows: [],
-});
-const toggleDialog = () => {
-  dialogData.value.isOpened = !dialogData.value.isOpened;
+const dialogsData = ref([]);
+const toggleDialog = (dialog) => {
+  dialog.value.isOpened = !dialog.value.isOpened;
 };
 
-const onConfirmDelete = async () => {
-  console.log("delete ", dialogData.value.selectedRows[0].name);
-  toggleDialog();
+const onConfirmDelete = async (dialog) => {
+  console.log("delete ", dialog.value.selectedRows[0].name);
+  toggleDialog(dialog);
 };
 const onDeleteRow = (row) => {
-  dialogData.value = {
+  const newDialog = ref({
     isOpened: true,
     title: `are you sure you want to delete ${row.name}?`,
-    onConfirm: onConfirmDelete,
+    onConfirm: () => onConfirmDelete(newDialog),
     selectedRows: [row],
     dialogWidth: "350px",
-  };
+  });
+  dialogsData.value.push(newDialog.value);
 };
 const onShowUsers = (row) => {
-  dialogData.value = {
+  const newDialog = ref({
     isOpened: true,
-    onConfirm: toggleDialog,
+    onConfirm: () => toggleDialog(newDialog),
     selectedRows: [row],
     dialogWidth: "800px",
     contentTable: {
       title: `${row.name}`,
       columns,
-      tableActions:getTableActions(),
+      tableActions: getTableActions(),
       rows,
     },
-    dialogData: {
-      isOpened: false,
-      onConfirm: toggleDialog,
-      selectedRows: [row],
-      dialogWidth: "800px",
-      contentTable: {
-        title: `${row.name}`,
-        columns,
-        tableActions:getTableActions(),
-        rows,
-      },
-    },
-  };
+  });
+  dialogsData.value.push(newDialog.value);
 };
 const columns = ref([
   {
@@ -106,25 +95,25 @@ const columns = ref([
 //     tooltip: () => "Show Users List",
 //   },
 // ]);
-const getTableActions= ()=>{
+const getTableActions = () => {
   return [
-  {
-    to: (props) => `groups-list/${props.name}`,
-    icon: () => "edit",
-    tooltip: () => "Edit",
-  },
-  {
-    onClick: (props) => onDeleteRow(props),
-    icon: () => "delete",
-    tooltip: () => "Delete",
-  },
-  {
-    onClick: (props) => onShowUsers(props),
-    icon: () => "people",
-    tooltip: () => "Show Users List",
-  },
-]
-}
+    {
+      to: (props) => `groups-list/${props.name}`,
+      icon: () => "edit",
+      tooltip: () => "Edit",
+    },
+    {
+      onClick: (props) => onDeleteRow(props),
+      icon: () => "delete",
+      tooltip: () => "Delete",
+    },
+    {
+      onClick: (props) => onShowUsers(props),
+      icon: () => "people",
+      tooltip: () => "Show Users List",
+    },
+  ];
+};
 const rows = ref([
   {
     name: "John",

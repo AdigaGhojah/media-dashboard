@@ -1,12 +1,17 @@
 <template>
   <div class="q-px-md" style="display: flex; justify-content: flex-end">
-    <q-btn color="primary" label="Add Media" icon-right="add" />
+    <q-btn color="primary" label="Add Media" icon-right="add" to="media-list/create"/>
   </div>
   <Table
     tableTitle="Medias"
     :columns="columns"
     :rows="rows"
-    :tableActions="tableActions"
+    :tableActions="getTableActions()"
+  />
+  <Dialog
+    v-for="dialogData in dialogsData"
+    :key="dialogData.name"
+    :dialogObj="dialogData"
   />
 </template>
 
@@ -32,18 +37,42 @@ const columns = ref([
   { name: "actions", label: "Actions", field: "", align: "center" },
 ]);
 
-const onEditRow = (row) => {
-  console.log("edit ", row.name);
+const dialogsData = ref([]);
+const toggleDialog = (dialog) => {
+  dialog.value.isOpened = !dialog.value.isOpened;
 };
 
-const onDeleteRow = (row) => {
-  console.log("delete ", row.name);
-  // deleteDialogRow.value = row;
-  // isDeleteDialogOpen.value = true;
+const onConfirmDelete = async (dialog) => {
+  console.log("delete ", dialog.value.selectedRows[0].name);
+  toggleDialog(dialog);
 };
-const tableActions = ref([
+const onDeleteRow = (row) => {
+  const newDialog = ref({
+    isOpened: true,
+    title: `are you sure you want to delete ${row.name}?`,
+    onConfirm: () => onConfirmDelete(newDialog),
+    selectedRows: [row],
+    dialogWidth: "350px",
+  });
+  dialogsData.value.push(newDialog.value);
+};
+const onConfirmToggleStatus = async (dialog) => {
+  console.log("toggle status ", dialog.value.selectedRows[0].name);
+  toggleDialog(dialog);
+};
+const onTogglePublishState = (row)=>{
+const newDialog = ref({
+    isOpened: true,
+    title: `are you sure you want to ${row.status=='published'?'unpublished':'published'} ${row.name}?`,
+    onConfirm: () => onConfirmToggleStatus(newDialog),
+    selectedRows: [row],
+    dialogWidth: "350px",
+  });
+  dialogsData.value.push(newDialog.value);
+}
+const getTableActions = ()=>[
   {
-    onClick: (props) => onEditRow(props),
+    to: (props) => `media-list/${props.name}`,
     icon: () => "edit",
     tooltip: () => "Edit",
   },
@@ -59,16 +88,16 @@ const tableActions = ref([
     tooltip: (props) => (props.status == "published" ? "Unpublish" : "Publish"),
   },
   {
-    onClick: (props) => onShowMediaReports(props),
+    to: (props) => `media-reports/${props.name}`,
     icon: () => "assessment",
     tooltip: () => "Media Reports",
   },
   {
-    onClick: (props) => onPreview(props),
+    to: (props) => `media/preview/${props.name}`,
     icon: () => "remove_red_eye",
     tooltip: () => "Preview",
   },
-]);
+];
 
 const rows = ref([
   {

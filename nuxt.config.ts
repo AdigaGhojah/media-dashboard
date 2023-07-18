@@ -5,4 +5,5 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-quasar-ui'
   ],
+  css: ['/app.css'],
 })

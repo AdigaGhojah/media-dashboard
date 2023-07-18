@@ -11,9 +11,13 @@
     tableTitle="Employees"
     :columns="columns"
     :rows="rows"
-    :tableActions="tableActions"
+    :tableActions="getTableActions()"
   />
-  <Dialog :dialogObj="dialogData" />
+  <Dialog
+    v-for="dialogData in dialogsData"
+    :key="dialogData.name"
+    :dialogObj="dialogData"
+  />
 </template>
 <script></script>
 <script setup>
@@ -37,28 +41,28 @@ const columns = ref([
   },
   { name: "actions", label: "Actions", field: "", align: "center" },
 ]);
-const dialogData = ref({
-  isOpened: false,
-  title: "",
-  onConfirm: () => {},
-  selectedRows: [],
-});
+const dialogsData = ref([]);
 
-const onConfirmDelete = async () => {
-  console.log('delete ',deleteDialog.value.selectedRows[0].name);
-  deleteDialog.value.isOpened = false;
+const toggleDialog = (dialog) => {
+  dialog.value.isOpened = !dialog.value.isOpened;
+};
+const onConfirmDelete = async (dialog) => {
+  toggleDialog(dialog);
 };
 const onDeleteRow = (row) => {
-  dialogData.value = {
-  isOpened: true,
-  title: `are you sure you want to delete ${row.name}?`,
-  onConfirm: onConfirmDelete,
-  selectedRows:[row],
-  dialogWidth:'350px',
-}
+  const newDialog = ref({
+    isOpened: true,
+    title: `are you sure you want to delete ${row.name}?`,
+    onConfirm: () => {
+      onConfirmDelete(newDialog);
+    },
+    selectedRows: [row],
+    dialogWidth: "350px",
+  });
+  dialogsData.value.push(newDialog.value);
 };
 
-const tableActions = ref([
+const getTableActions = () => [
   {
     to: (props) => `employees-list/${props.name}`,
     icon: () => "edit",
@@ -69,7 +73,7 @@ const tableActions = ref([
     icon: () => "delete",
     tooltip: () => "Delete",
   },
-]);
+];
 
 const rows = ref([
   {
