@@ -6,7 +6,16 @@ export default defineNuxtConfig({
     'nuxt-quasar-ui'
   ],
   app: {
-    baseURL: '/media-dashboard/' //https://github.com/AdigaGhojah/media-dashboard
+    baseURL: '/media-dashboard/', //https://github.com/AdigaGhojah/media-dashboard
+    head:{
+      script: [
+        {
+            type: 'text/javascript',
+            src: '/assets/js/particles.min.js',
+            body: true
+        },
+    ]
+    }
   },
   css: ['/app.css'],
 })
