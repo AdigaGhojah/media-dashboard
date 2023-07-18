@@ -1,1 +1,0 @@
-import{C as s,r}from"./entry.6f0a4fa0.js";const o={__name:"[id]",setup(i){const e=s(),a=r(`Edit ${e.params.id}`),t=r("update");return e.params.id=="create"?(a.value="Add Media",t.value="Create"):e.params.id=="preview"&&(a.value=`Preview ${e.params.id}`,t.value=""),(u,p)=>"123"}};export{o as default};
